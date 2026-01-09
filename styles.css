@@ -1,0 +1,618 @@
+/* ============================================
+   CSS Reset & Base Styles
+   ============================================ */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-size: 16px;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  scroll-behavior: smooth;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  line-height: 1.6;
+  color: var(--color-text);
+  background-color: var(--color-background);
+  min-height: 100vh;
+}
+
+/* ============================================
+   CSS Custom Properties (Design Tokens)
+   ============================================ */
+
+:root {
+  /* Dairy-themed Color Palette */
+  --color-white: #FFFFFF;
+  --color-cream: #F8F6F0;
+  --color-cream-dark: #F0EDE3;
+  --color-blue-light: #E3F2FD;
+  --color-blue: #64B5F6;
+  --color-blue-dark: #1976D2;
+  --color-green-light: #E8F5E8;
+  --color-green: #66BB6A;
+  --color-green-dark: #2c5f2d;
+  --color-gray-light: #F5F5F5;
+  --color-gray: #757575;
+  --color-gray-dark: #424242;
+  --color-text: #333333;
+  --color-text-light: #666666;
+  
+  /* Semantic Colors */
+  --color-primary: var(--color-green-dark);
+  --color-primary-light: var(--color-green);
+  --color-secondary: var(--color-blue-dark);
+  --color-accent: var(--color-blue);
+  --color-background: var(--color-white);
+  --color-surface: var(--color-cream);
+  --color-surface-alt: var(--color-blue-light);
+  
+  /* Typography Scale */
+  --font-size-xs: clamp(0.75rem, 0.7rem + 0.25vw, 0.875rem);
+  --font-size-sm: clamp(0.875rem, 0.8rem + 0.375vw, 1rem);
+  --font-size-base: clamp(1rem, 0.95rem + 0.25vw, 1.125rem);
+  --font-size-lg: clamp(1.125rem, 1.05rem + 0.375vw, 1.25rem);
+  --font-size-xl: clamp(1.25rem, 1.15rem + 0.5vw, 1.5rem);
+  --font-size-2xl: clamp(1.5rem, 1.35rem + 0.75vw, 2rem);
+  --font-size-3xl: clamp(2rem, 1.75rem + 1.25vw, 2.5rem);
+  --font-size-4xl: clamp(2.5rem, 2rem + 2.5vw, 3.5rem);
+  
+  /* Spacing Scale */
+  --space-xs: clamp(0.25rem, 0.2rem + 0.25vw, 0.5rem);
+  --space-sm: clamp(0.5rem, 0.45rem + 0.25vw, 0.75rem);
+  --space-md: clamp(1rem, 0.9rem + 0.5vw, 1.5rem);
+  --space-lg: clamp(1.5rem, 1.3rem + 1vw, 2.5rem);
+  --space-xl: clamp(2rem, 1.7rem + 1.5vw, 3.5rem);
+  --space-2xl: clamp(3rem, 2.5rem + 2.5vw, 5rem);
+  
+  /* Layout */
+  --container-max-width: 1200px;
+  --container-padding: var(--space-md);
+  --content-max-width: 65ch;
+  
+  /* Border Radius */
+  --radius-sm: 4px;
+  --radius-md: 8px;
+  --radius-lg: 12px;
+  --radius-xl: 16px;
+  
+  /* Shadows */
+  --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+  
+  /* Transitions */
+  --transition-fast: 150ms ease-in-out;
+  --transition-base: 250ms ease-in-out;
+  --transition-slow: 350ms ease-in-out;
+}
+
+/* ============================================
+   Typography
+   ============================================ */
+
+h1, h2, h3, h4, h5, h6 {
+  font-weight: 700;
+  line-height: 1.2;
+  color: var(--color-primary);
+  margin-bottom: var(--space-sm);
+}
+
+h1 {
+  font-size: var(--font-size-4xl);
+}
+
+h2 {
+  font-size: var(--font-size-3xl);
+}
+
+h3 {
+  font-size: var(--font-size-2xl);
+}
+
+h4 {
+  font-size: var(--font-size-xl);
+}
+
+h5 {
+  font-size: var(--font-size-lg);
+}
+
+h6 {
+  font-size: var(--font-size-base);
+}
+
+p {
+  margin-bottom: var(--space-md);
+  color: var(--color-text);
+}
+
+a {
+  color: var(--color-secondary);
+  text-decoration: none;
+  transition: color var(--transition-fast);
+}
+
+a:hover {
+  color: var(--color-accent);
+  text-decoration: underline;
+}
+
+a:focus-visible {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 2px;
+  border-radius: var(--radius-sm);
+}
+
+ul, ol {
+  margin-bottom: var(--space-md);
+  padding-left: var(--space-lg);
+}
+
+li {
+  margin-bottom: var(--space-xs);
+}
+
+address {
+  font-style: normal;
+}
+
+/* ============================================
+   Skip Link (Accessibility)
+   ============================================ */
+
+.skip-link {
+  position: absolute;
+  top: -100px;
+  left: var(--space-md);
+  background: var(--color-primary);
+  color: var(--color-white);
+  padding: var(--space-sm) var(--space-md);
+  text-decoration: none;
+  border-radius: var(--radius-md);
+  z-index: 1000;
+  font-weight: 600;
+  transition: top var(--transition-fast);
+}
+
+.skip-link:focus {
+  top: var(--space-md);
+}
+
+/* ============================================
+   Header
+   ============================================ */
+
+header {
+  background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-green) 100%);
+  color: var(--color-white);
+  padding: var(--space-md) 0;
+  box-shadow: var(--shadow-md);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.header-container {
+  max-width: var(--container-max-width);
+  margin: 0 auto;
+  padding: 0 var(--container-padding);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+  align-items: center;
+}
+
+.business-name {
+  font-size: var(--font-size-2xl);
+  color: var(--color-white);
+  margin: 0;
+  text-align: center;
+}
+
+nav ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-sm);
+  justify-content: center;
+}
+
+nav a {
+  color: var(--color-white);
+  padding: var(--space-xs) var(--space-md);
+  border-radius: var(--radius-md);
+  transition: background-color var(--transition-fast);
+  font-weight: 500;
+}
+
+nav a:hover {
+  background-color: rgba(255, 255, 255, 0.2);
+  text-decoration: none;
+}
+
+nav a[aria-current="page"] {
+  background-color: rgba(255, 255, 255, 0.3);
+}
+
+/* ============================================
+   Main Content
+   ============================================ */
+
+main {
+  min-height: calc(100vh - 200px);
+}
+
+section {
+  padding: var(--space-xl) 0;
+}
+
+section:nth-child(even) {
+  background-color: var(--color-surface);
+}
+
+/* ============================================
+   Hero Section
+   ============================================ */
+
+.hero {
+  background: linear-gradient(135deg, var(--color-blue-light) 0%, var(--color-green-light) 100%);
+  padding: var(--space-2xl) 0;
+  text-align: center;
+}
+
+.hero-content {
+  max-width: var(--container-max-width);
+  margin: 0 auto;
+  padding: 0 var(--container-padding);
+}
+
+.hero h2 {
+  color: var(--color-primary);
+  margin-bottom: var(--space-md);
+}
+
+.hero-description {
+  font-size: var(--font-size-lg);
+  color: var(--color-text);
+  margin-bottom: var(--space-md);
+  max-width: 800px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.hero-tagline {
+  font-size: var(--font-size-base);
+  color: var(--color-text-light);
+  font-style: italic;
+  max-width: 700px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* ============================================
+   About Section
+   ============================================ */
+
+.about-container {
+  max-width: var(--container-max-width);
+  margin: 0 auto;
+  padding: 0 var(--container-padding);
+}
+
+.about h2 {
+  text-align: center;
+  margin-bottom: var(--space-lg);
+}
+
+.about-content {
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.about-content h3 {
+  color: var(--color-primary);
+  margin-top: var(--space-lg);
+  margin-bottom: var(--space-sm);
+}
+
+.about-content h3:first-child {
+  margin-top: 0;
+}
+
+.about-content p {
+  color: var(--color-text);
+  line-height: 1.8;
+}
+
+/* ============================================
+   Products Section
+   ============================================ */
+
+.products {
+  background-color: var(--color-white);
+}
+
+.products-container {
+  max-width: var(--container-max-width);
+  margin: 0 auto;
+  padding: 0 var(--container-padding);
+}
+
+.products h2 {
+  text-align: center;
+  margin-bottom: var(--space-xl);
+}
+
+.product-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-lg);
+}
+
+.product-item {
+  background: var(--color-surface);
+  padding: var(--space-lg);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
+  transition: transform var(--transition-base), box-shadow var(--transition-base);
+}
+
+.product-item:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-lg);
+}
+
+.product-item h3 {
+  color: var(--color-primary);
+  margin-bottom: var(--space-sm);
+}
+
+.product-item > p {
+  color: var(--color-text);
+  margin-bottom: var(--space-md);
+  line-height: 1.7;
+}
+
+.product-item ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.product-item li {
+  padding-left: var(--space-md);
+  position: relative;
+  color: var(--color-text-light);
+  margin-bottom: var(--space-xs);
+}
+
+.product-item li::before {
+  content: "✓";
+  position: absolute;
+  left: 0;
+  color: var(--color-green);
+  font-weight: bold;
+}
+
+/* ============================================
+   Contact Section
+   ============================================ */
+
+.contact {
+  background-color: var(--color-surface);
+}
+
+.contact-container {
+  max-width: var(--container-max-width);
+  margin: 0 auto;
+  padding: 0 var(--container-padding);
+}
+
+.contact h2 {
+  text-align: center;
+  margin-bottom: var(--space-xl);
+}
+
+.contact-content {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-xl);
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.contact-info h3,
+.contact-form-info h3 {
+  color: var(--color-primary);
+  margin-top: var(--space-lg);
+  margin-bottom: var(--space-sm);
+}
+
+.contact-info h3:first-child,
+.contact-form-info h3:first-child {
+  margin-top: 0;
+}
+
+.contact-info p,
+.contact-form-info p {
+  color: var(--color-text);
+  line-height: 1.7;
+}
+
+.contact-info address {
+  margin-bottom: var(--space-md);
+}
+
+.contact-info address p {
+  margin-bottom: var(--space-xs);
+}
+
+.contact-info dl {
+  margin-bottom: var(--space-md);
+}
+
+.contact-info dt {
+  font-weight: 600;
+  color: var(--color-text);
+  margin-top: var(--space-sm);
+}
+
+.contact-info dd {
+  margin-left: var(--space-md);
+  color: var(--color-text-light);
+}
+
+/* ============================================
+   Footer
+   ============================================ */
+
+footer {
+  background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-green) 100%);
+  color: var(--color-white);
+  padding: var(--space-xl) 0 var(--space-lg);
+  margin-top: auto;
+}
+
+.footer-container {
+  max-width: var(--container-max-width);
+  margin: 0 auto;
+  padding: 0 var(--container-padding);
+  text-align: center;
+}
+
+.footer-container p {
+  color: var(--color-white);
+  margin-bottom: var(--space-sm);
+}
+
+footer nav ul {
+  list-style: none;
+  padding: 0;
+  margin: var(--space-md) 0 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-md);
+  justify-content: center;
+}
+
+footer nav a {
+  color: var(--color-white);
+  transition: opacity var(--transition-fast);
+}
+
+footer nav a:hover {
+  opacity: 0.8;
+  text-decoration: underline;
+}
+
+/* ============================================
+   Tablet Breakpoint (768px)
+   ============================================ */
+
+@media (min-width: 768px) {
+  .header-container {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .business-name {
+    text-align: left;
+  }
+  
+  nav ul {
+    gap: var(--space-md);
+  }
+  
+  .product-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  
+  .contact-content {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+/* ============================================
+   Desktop Breakpoint (1024px)
+   ============================================ */
+
+@media (min-width: 1024px) {
+  .product-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+  
+  .hero-content {
+    padding: var(--space-xl) var(--container-padding);
+  }
+}
+
+/* ============================================
+   Large Desktop (1280px+)
+   ============================================ */
+
+@media (min-width: 1280px) {
+  :root {
+    --container-padding: var(--space-lg);
+  }
+}
+
+/* ============================================
+   Print Styles
+   ============================================ */
+
+@media print {
+  header,
+  footer,
+  nav,
+  .skip-link {
+    display: none;
+  }
+  
+  body {
+    background: white;
+    color: black;
+  }
+  
+  section {
+    page-break-inside: avoid;
+  }
+  
+  h1, h2, h3 {
+    page-break-after: avoid;
+  }
+  
+  a {
+    text-decoration: underline;
+  }
+  
+  a[href^="http"]:after {
+    content: " (" attr(href) ")";
+  }
+}
