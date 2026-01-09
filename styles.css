@@ -1,449 +1,653 @@
-/* Reset and Base Styles */
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
+/**
+ * Green Valley Dairy Farm - Styles
+ * Modern, responsive CSS with accessibility and performance optimizations
+ */
+
+/* ============================================================================
+   CSS RESET & BASE STYLES
+   ============================================================================ */
+
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
 }
 
-:root {
-  /* Color Palette */
-  --color-primary: #2d5016;
-  --color-primary-light: #4a7c2a;
-  --color-primary-dark: #1a3009;
-  --color-secondary: #f4e8d8;
-  --color-accent: #d4a574;
-  --color-text: #333333;
-  --color-text-light: #666666;
-  --color-background: #ffffff;
-  --color-background-alt: #f9f6f2;
-  
-  /* Spacing */
-  --space-xs: 0.5rem;
-  --space-sm: 1rem;
-  --space-md: 1.5rem;
-  --space-lg: 2rem;
-  --space-xl: 3rem;
-  --space-2xl: 4rem;
-  
-  /* Typography */
-  --font-family-base: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-  --font-family-heading: Georgia, 'Times New Roman', serif;
-  --font-size-base: 1rem;
-  --font-size-lg: 1.125rem;
-  --font-size-xl: 1.25rem;
-  --font-size-2xl: 1.5rem;
-  --font-size-3xl: 2rem;
-  --font-size-4xl: 2.5rem;
-  --line-height-base: 1.6;
-  --line-height-heading: 1.2;
-  
-  /* Transitions */
-  --transition-base: 0.3s ease;
-  --transition-fast: 0.15s ease;
+html {
+    scroll-behavior: smooth;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    html {
+        scroll-behavior: auto;
+    }
 }
 
 body {
-  font-family: var(--font-family-base);
-  font-size: var(--font-size-base);
-  line-height: var(--line-height-base);
-  color: var(--color-text);
-  background-color: var(--color-background);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    line-height: 1.6;
+    color: #333;
+    background-color: #f9f9f9;
 }
 
-/* Skip Link */
+img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+}
+
+a {
+    color: inherit;
+    text-decoration: none;
+}
+
+/* ============================================================================
+   CSS CUSTOM PROPERTIES
+   ============================================================================ */
+
+:root {
+    --color-primary: #2d5016;
+    --color-secondary: #8fbc8f;
+    --color-accent: #d4a574;
+    --color-text: #333;
+    --color-text-light: #666;
+    --color-background: #f9f9f9;
+    --color-white: #ffffff;
+    
+    --spacing-xs: 0.5rem;
+    --spacing-sm: 1rem;
+    --spacing-md: 2rem;
+    --spacing-lg: 3rem;
+    --spacing-xl: 4rem;
+    
+    --font-size-base: 1rem;
+    --font-size-lg: 1.25rem;
+    --font-size-xl: 1.5rem;
+    --font-size-2xl: 2rem;
+    --font-size-3xl: 2.5rem;
+    
+    --max-width: 1200px;
+    --header-height: 80px;
+    
+    --transition-fast: 0.2s ease;
+    --transition-base: 0.3s ease;
+    --transition-slow: 0.6s ease;
+}
+
+/* ============================================================================
+   ACCESSIBILITY
+   ============================================================================ */
+
 .skip-link {
-  position: absolute;
-  top: -40px;
-  left: 0;
-  background: var(--color-primary);
-  color: white;
-  padding: var(--space-xs) var(--space-sm);
-  text-decoration: none;
-  z-index: 100;
+    position: absolute;
+    top: -40px;
+    left: 0;
+    background: var(--color-primary);
+    color: var(--color-white);
+    padding: 8px 16px;
+    text-decoration: none;
+    z-index: 100;
+    border-radius: 0 0 4px 0;
 }
 
 .skip-link:focus {
-  top: 0;
+    top: 0;
 }
 
-/* Header */
+/* Focus styles for keyboard navigation */
+:focus-visible {
+    outline: 2px solid var(--color-accent);
+    outline-offset: 2px;
+}
+
+/* ============================================================================
+   HEADER & NAVIGATION
+   ============================================================================ */
+
 header {
-  background-color: var(--color-primary);
-  color: white;
-  padding: var(--space-md) 0;
-  position: sticky;
-  top: 0;
-  z-index: 50;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    background-color: var(--color-primary);
+    color: var(--color-white);
+    padding: var(--spacing-sm) 0;
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 }
 
 .header-container {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 0 var(--space-md);
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  flex-wrap: wrap;
-  gap: var(--space-sm);
+    max-width: var(--max-width);
+    margin: 0 auto;
+    padding: 0 var(--spacing-sm);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
 }
 
 .business-name {
-  font-family: var(--font-family-heading);
-  font-size: var(--font-size-2xl);
-  font-weight: 700;
-  margin: 0;
+    font-size: var(--font-size-xl);
+    font-weight: 700;
 }
 
 nav ul {
-  list-style: none;
-  display: flex;
-  gap: var(--space-md);
-  flex-wrap: wrap;
+    list-style: none;
+    display: flex;
+    gap: var(--spacing-md);
 }
 
 nav a {
-  color: white;
-  text-decoration: none;
-  font-weight: 500;
-  padding: var(--space-xs) var(--space-sm);
-  border-radius: 4px;
-  transition: background-color var(--transition-base);
+    color: var(--color-white);
+    font-weight: 500;
+    transition: color var(--transition-fast);
+    padding: var(--spacing-xs) var(--spacing-sm);
+    border-radius: 4px;
 }
 
 nav a:hover,
 nav a:focus {
-  background-color: var(--color-primary-light);
-  outline: none;
+    color: var(--color-accent);
+    background-color: rgba(255, 255, 255, 0.1);
 }
 
 nav a[aria-current="page"] {
-  background-color: var(--color-primary-dark);
+    color: var(--color-accent);
 }
 
-/* Responsive Images */
-img {
-  max-width: 100%;
-  height: auto;
-  display: block;
+/* ============================================================================
+   HAMBURGER MENU STYLES
+   ============================================================================ */
+
+.hamburger-menu {
+    display: none;
+    flex-direction: column;
+    gap: 4px;
+    background: transparent;
+    border: none;
+    padding: 8px;
+    cursor: pointer;
+    z-index: 100;
+    transition: transform var(--transition-base);
 }
 
-/* Hero Section */
+.hamburger-menu:hover {
+    transform: scale(1.05);
+}
+
+.hamburger-menu:active {
+    transform: scale(0.95);
+}
+
+.hamburger-line {
+    width: 25px;
+    height: 3px;
+    background-color: var(--color-white);
+    transition: all var(--transition-base);
+    border-radius: 2px;
+}
+
+.hamburger-active .hamburger-line:nth-child(1) {
+    transform: rotate(45deg) translate(5px, 5px);
+}
+
+.hamburger-active .hamburger-line:nth-child(2) {
+    opacity: 0;
+}
+
+.hamburger-active .hamburger-line:nth-child(3) {
+    transform: rotate(-45deg) translate(7px, -6px);
+}
+
+/* Mobile navigation styles */
+@media (max-width: 768px) {
+    .hamburger-menu {
+        display: flex;
+    }
+
+    nav {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        background-color: var(--color-primary);
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height var(--transition-base), box-shadow var(--transition-base);
+    }
+
+    nav.menu-active {
+        max-height: 400px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    }
+
+    nav ul {
+        flex-direction: column;
+        padding: var(--spacing-sm);
+        gap: 0;
+    }
+
+    nav li {
+        width: 100%;
+    }
+
+    nav a {
+        display: block;
+        padding: 0.75rem 1rem;
+        border-radius: 4px;
+    }
+
+    nav a:hover,
+    nav a:focus {
+        background-color: rgba(255, 255, 255, 0.15);
+    }
+}
+
+/* ============================================================================
+   HERO SECTION
+   ============================================================================ */
+
 .hero {
-  background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-light) 100%);
-  color: white;
-  padding: var(--space-2xl) var(--space-md);
-  text-align: center;
+    background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-secondary) 100%);
+    color: var(--color-white);
+    padding: var(--spacing-xl) var(--spacing-sm);
+    text-align: center;
+    min-height: 60vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .hero-content {
-  max-width: 800px;
-  margin: 0 auto;
+    max-width: 800px;
+    margin: 0 auto;
 }
 
 .hero h2 {
-  font-family: var(--font-family-heading);
-  font-size: var(--font-size-4xl);
-  line-height: var(--line-height-heading);
-  margin-bottom: var(--space-md);
-  font-weight: 700;
+    font-size: var(--font-size-3xl);
+    margin-bottom: var(--spacing-md);
+    font-weight: 700;
 }
 
 .hero-description {
-  font-size: var(--font-size-lg);
-  line-height: 1.8;
-  margin-bottom: var(--space-md);
-  opacity: 0.95;
+    font-size: var(--font-size-lg);
+    margin-bottom: var(--spacing-md);
+    line-height: 1.8;
 }
 
 .hero-tagline {
-  font-size: var(--font-size-xl);
-  font-style: italic;
-  opacity: 0.9;
+    font-size: var(--font-size-xl);
+    font-weight: 600;
+    color: var(--color-accent);
+    text-transform: uppercase;
+    letter-spacing: 2px;
 }
 
-/* About Section */
+/* ============================================================================
+   SECTION STYLES
+   ============================================================================ */
+
+section {
+    padding: var(--spacing-xl) var(--spacing-sm);
+}
+
+section h2 {
+    font-size: var(--font-size-2xl);
+    color: var(--color-primary);
+    margin-bottom: var(--spacing-md);
+    text-align: center;
+}
+
+.about-container,
+.products-container,
+.contact-container {
+    max-width: var(--max-width);
+    margin: 0 auto;
+}
+
+/* ============================================================================
+   ABOUT SECTION
+   ============================================================================ */
+
 .about {
-  background-color: var(--color-background-alt);
-  padding: var(--space-2xl) var(--space-md);
+    background-color: var(--color-white);
 }
 
-.about-container {
-  max-width: 1000px;
-  margin: 0 auto;
-}
-
-.about h2 {
-  font-family: var(--font-family-heading);
-  font-size: var(--font-size-3xl);
-  color: var(--color-primary);
-  text-align: center;
-  margin-bottom: var(--space-xl);
-  font-weight: 700;
+.about-content {
+    max-width: 800px;
+    margin: 0 auto;
 }
 
 .about-content h3 {
-  font-family: var(--font-family-heading);
-  font-size: var(--font-size-xl);
-  color: var(--color-primary-dark);
-  margin-top: var(--space-lg);
-  margin-bottom: var(--space-sm);
-  font-weight: 600;
+    font-size: var(--font-size-xl);
+    color: var(--color-primary);
+    margin-top: var(--spacing-md);
+    margin-bottom: var(--spacing-sm);
 }
 
 .about-content p {
-  margin-bottom: var(--space-md);
-  color: var(--color-text);
-  line-height: 1.8;
+    margin-bottom: var(--spacing-sm);
+    color: var(--color-text-light);
+    line-height: 1.8;
 }
 
-/* Products Section */
+/* ============================================================================
+   PRODUCTS SECTION
+   ============================================================================ */
+
 .products {
-  padding: var(--space-2xl) var(--space-md);
-  background-color: var(--color-background);
-}
-
-.products-container {
-  max-width: 1200px;
-  margin: 0 auto;
-}
-
-.products h2 {
-  font-family: var(--font-family-heading);
-  font-size: var(--font-size-3xl);
-  color: var(--color-primary);
-  text-align: center;
-  margin-bottom: var(--space-xl);
-  font-weight: 700;
+    background-color: var(--color-background);
 }
 
 .product-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(min(300px, 100%), 1fr));
-  gap: var(--space-lg);
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: var(--spacing-md);
+    margin-top: var(--spacing-md);
 }
 
 .product-item {
-  background-color: var(--color-background-alt);
-  padding: var(--space-lg);
-  border-radius: 8px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
-  transition: transform var(--transition-base), box-shadow var(--transition-base);
+    background-color: var(--color-white);
+    padding: var(--spacing-md);
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    transition: transform var(--transition-base), box-shadow var(--transition-base);
 }
 
 .product-item:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.12);
+    transform: translateY(-4px);
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
 }
 
 .product-item h3 {
-  font-family: var(--font-family-heading);
-  font-size: var(--font-size-xl);
-  color: var(--color-primary);
-  margin-bottom: var(--space-sm);
-  font-weight: 600;
+    font-size: var(--font-size-xl);
+    color: var(--color-primary);
+    margin-bottom: var(--spacing-sm);
 }
 
 .product-item p {
-  color: var(--color-text);
-  margin-bottom: var(--space-md);
-  line-height: 1.7;
+    color: var(--color-text-light);
+    margin-bottom: var(--spacing-sm);
 }
 
 .product-item ul {
-  list-style: none;
-  padding-left: 0;
+    list-style: none;
+    padding-left: 0;
 }
 
 .product-item li {
-  padding-left: var(--space-md);
-  margin-bottom: var(--space-xs);
-  position: relative;
-  color: var(--color-text-light);
+    padding: var(--spacing-xs) 0;
+    color: var(--color-text);
+    position: relative;
+    padding-left: var(--spacing-md);
 }
 
 .product-item li::before {
-  content: '✓';
-  position: absolute;
-  left: 0;
-  color: var(--color-primary);
-  font-weight: bold;
+    content: "✓";
+    position: absolute;
+    left: 0;
+    color: var(--color-secondary);
+    font-weight: bold;
 }
 
-/* Contact Section */
+/* ============================================================================
+   CONTACT SECTION
+   ============================================================================ */
+
 .contact {
-  background-color: var(--color-background-alt);
-  padding: var(--space-2xl) var(--space-md);
-}
-
-.contact-container {
-  max-width: 1000px;
-  margin: 0 auto;
-}
-
-.contact h2 {
-  font-family: var(--font-family-heading);
-  font-size: var(--font-size-3xl);
-  color: var(--color-primary);
-  text-align: center;
-  margin-bottom: var(--space-xl);
-  font-weight: 700;
+    background-color: var(--color-white);
 }
 
 .contact-content {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(min(300px, 100%), 1fr));
-  gap: var(--space-xl);
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: var(--spacing-lg);
+    margin-top: var(--spacing-md);
 }
 
 .contact-info h3,
 .contact-form-info h3 {
-  font-family: var(--font-family-heading);
-  font-size: var(--font-size-xl);
-  color: var(--color-primary-dark);
-  margin-bottom: var(--space-sm);
-  font-weight: 600;
+    font-size: var(--font-size-xl);
+    color: var(--color-primary);
+    margin-bottom: var(--spacing-sm);
 }
 
-.contact-info address {
-  font-style: normal;
-  margin-bottom: var(--space-lg);
+address {
+    font-style: normal;
+    margin-bottom: var(--spacing-md);
 }
 
-.contact-info address p {
-  margin-bottom: var(--space-xs);
+address p {
+    margin-bottom: var(--spacing-xs);
 }
 
-.contact-info dl {
-  margin-bottom: var(--space-lg);
+dl {
+    margin-top: var(--spacing-md);
 }
 
-.contact-info dt {
-  font-weight: 600;
-  color: var(--color-primary-dark);
-  margin-top: var(--space-sm);
+dt {
+    font-weight: 600;
+    color: var(--color-primary);
+    margin-top: var(--spacing-sm);
+    margin-bottom: var(--spacing-xs);
 }
 
-.contact-info dd {
-  margin-left: 0;
-  margin-bottom: var(--space-xs);
+dd {
+    margin-left: 0;
+    margin-bottom: var(--spacing-xs);
+    color: var(--color-text-light);
 }
 
-.contact-info a,
-.contact-form-info a {
-  color: var(--color-primary);
-  text-decoration: none;
-  transition: color var(--transition-base);
+.contact a {
+    color: var(--color-primary);
+    text-decoration: underline;
+    transition: color var(--transition-fast);
 }
 
-.contact-info a:hover,
-.contact-info a:focus,
-.contact-form-info a:hover,
-.contact-form-info a:focus {
-  color: var(--color-primary-light);
-  text-decoration: underline;
+.contact a:hover,
+.contact a:focus {
+    color: var(--color-accent);
 }
 
 .contact-form-info p {
-  margin-bottom: var(--space-md);
-  line-height: 1.7;
-  color: var(--color-text);
+    color: var(--color-text-light);
+    line-height: 1.8;
+    margin-bottom: var(--spacing-sm);
 }
 
-/* Footer */
+/* ============================================================================
+   FOOTER
+   ============================================================================ */
+
 footer {
-  background-color: var(--color-primary-dark);
-  color: white;
-  padding: var(--space-lg) var(--space-md);
-  text-align: center;
+    background-color: var(--color-primary);
+    color: var(--color-white);
+    padding: var(--spacing-md) var(--spacing-sm);
+    text-align: center;
 }
 
 .footer-container {
-  max-width: 1200px;
-  margin: 0 auto;
+    max-width: var(--max-width);
+    margin: 0 auto;
 }
 
 footer p {
-  margin-bottom: var(--space-xs);
-  opacity: 0.9;
-}
-
-footer nav {
-  margin-top: var(--space-md);
+    margin-bottom: var(--spacing-xs);
 }
 
 footer nav ul {
-  list-style: none;
-  display: flex;
-  justify-content: center;
-  gap: var(--space-md);
-  flex-wrap: wrap;
+    list-style: none;
+    display: flex;
+    justify-content: center;
+    gap: var(--spacing-md);
+    margin-top: var(--spacing-sm);
+    flex-wrap: wrap;
 }
 
 footer nav a {
-  color: white;
-  text-decoration: none;
-  opacity: 0.8;
-  transition: opacity var(--transition-base);
+    color: var(--color-white);
+    transition: color var(--transition-fast);
 }
 
 footer nav a:hover,
 footer nav a:focus {
-  opacity: 1;
-  text-decoration: underline;
+    color: var(--color-accent);
 }
 
-/* Responsive Typography */
+/* ============================================================================
+   LAZY LOADING STYLES
+   ============================================================================ */
+
+img[data-src] {
+    opacity: 0;
+    transition: opacity var(--transition-slow);
+}
+
+img.loaded {
+    opacity: 1;
+}
+
+img.error {
+    opacity: 0.5;
+    filter: grayscale(100%);
+}
+
+/* ============================================================================
+   SCROLL ANIMATIONS
+   ============================================================================ */
+
+.product-item,
+.about-content,
+.contact-content > div {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity var(--transition-slow), transform var(--transition-slow);
+}
+
+.product-item.is-visible,
+.about-content.is-visible,
+.contact-content > div.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Stagger animation for product items */
+.product-item:nth-child(1).is-visible {
+    transition-delay: 0.1s;
+}
+
+.product-item:nth-child(2).is-visible {
+    transition-delay: 0.2s;
+}
+
+.product-item:nth-child(3).is-visible {
+    transition-delay: 0.3s;
+}
+
+.product-item:nth-child(4).is-visible {
+    transition-delay: 0.4s;
+}
+
+/* ============================================================================
+   KEYBOARD NAVIGATION ENHANCEMENT
+   ============================================================================ */
+
+body:not(.keyboard-navigation) *:focus {
+    outline: none;
+}
+
+.keyboard-navigation *:focus {
+    outline: 2px solid var(--color-accent);
+    outline-offset: 2px;
+}
+
+/* ============================================================================
+   INTERACTIVE ELEMENT STATES
+   ============================================================================ */
+
+button,
+a {
+    cursor: pointer;
+    transition: all var(--transition-fast);
+}
+
+button:hover,
+a:hover {
+    opacity: 0.9;
+}
+
+button:active,
+a:active {
+    transform: scale(0.98);
+}
+
+/* ============================================================================
+   ACCESSIBILITY - REDUCED MOTION
+   ============================================================================ */
+
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+    }
+    
+    .product-item,
+    .about-content,
+    .contact-content > div {
+        opacity: 1;
+        transform: none;
+        transition: none;
+    }
+}
+
+/* ============================================================================
+   RESPONSIVE DESIGN
+   ============================================================================ */
+
 @media (max-width: 768px) {
-  :root {
-    --font-size-4xl: 2rem;
-    --font-size-3xl: 1.75rem;
-    --font-size-2xl: 1.5rem;
-    --font-size-xl: 1.25rem;
-  }
-  
-  .header-container {
-    flex-direction: column;
-    text-align: center;
-  }
-  
-  nav ul {
-    justify-content: center;
-  }
-  
-  .hero {
-    padding: var(--space-xl) var(--space-md);
-  }
+    :root {
+        --font-size-3xl: 2rem;
+        --font-size-2xl: 1.75rem;
+        --font-size-xl: 1.25rem;
+        --spacing-xl: 2rem;
+        --spacing-lg: 2rem;
+    }
+
+    .hero {
+        min-height: 50vh;
+        padding: var(--spacing-lg) var(--spacing-sm);
+    }
+
+    .product-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .contact-content {
+        grid-template-columns: 1fr;
+    }
+
+    footer nav ul {
+        flex-direction: column;
+        gap: var(--spacing-sm);
+    }
 }
 
 @media (max-width: 480px) {
-  :root {
-    --space-2xl: 2.5rem;
-    --space-xl: 2rem;
-  }
-  
-  nav ul {
-    gap: var(--space-sm);
-  }
-  
-  .product-grid {
-    grid-template-columns: 1fr;
-  }
-}
+    :root {
+        --font-size-3xl: 1.75rem;
+        --font-size-2xl: 1.5rem;
+        --spacing-md: 1.5rem;
+    }
 
-/* Focus Styles for Accessibility */
-:focus-visible {
-  outline: 2px solid var(--color-accent);
-  outline-offset: 2px;
-}
+    .header-container {
+        padding: 0 var(--spacing-xs);
+    }
 
-/* Reduced Motion Support */
-@media (prefers-reduced-motion: reduce) {
-  *,
-  *::before,
-  *::after {
-    animation-duration: 0.01ms !important;
-    animation-iteration-count: 1 !important;
-    transition-duration: 0.01ms !important;
-  }
+    .business-name {
+        font-size: var(--font-size-lg);
+    }
 }
